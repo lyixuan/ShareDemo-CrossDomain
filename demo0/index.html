@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>跨域</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<h2>受同源策略限制的跨域与不受同源策略限制的跨域</h2>
+<h3>img</h3>
+<img src="http://47.104.97.226:7008/demo/user.png" alt="" width="200">
+<h3>ajax</h3>
+<button onclick="get('http://47.104.97.226:7008/demo/user.png')">发送跨域get请求</button>
+<script>
+  function get(url) {
+    axios.get(url).then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ajax请求页面</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<h2>模拟跨域请求</h2>
+
+<button onclick="get('http://localhost:9000/user')">发送跨域get请求 - http://localhost:9000/user</button>
+<button onclick="post('http://localhost:9000/user')">发送跨域post请求 - http://localhost:9000/user</button>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>跨域请求不允许时报错，请求是否已返回</p>
+<p>跨域请求get与post不同-简单与非简单请求</p>
+<script>
+  function get(url) {
+    axios.get(url, {
+      params: {
+        ID: 12345
+      }
+    }).then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  function post(url) {
+    axios.post(url, {
+      ID: 12345
+    }).then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+</script>
+</body>
+</html>

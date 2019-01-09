@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>窗口通信</title>
+</head>
+<body>
+<div id="box"></div>
+我是第一个网页
+
+
+<script>
+  //弹出一个新窗口
+  // let domain = 'http://localhost:63342';
+  let domain = 'https://localhost:18080';
+  let myPopup = window.open(domain + '/index.html','myWindow2');
+
+  //周期性的发送消息
+  setInterval(function(){
+    let message = 'Hello!  The time is: ' + (new Date().getTime());
+    console.log('blog.local:  sending message:  ' + message);
+    //send the message and target URI
+    myPopup.postMessage(message,domain);
+  },3000);
+
+</script>
+</body>
+</html>

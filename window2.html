@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>窗口通信</title>
+</head>
+<body>
+
+我是第二个网页
+<div id="showMessage"></div>
+<script>
+  const showMessage = document.getElementById('showMessage');
+  //监听消息反馈
+  window.addEventListener('message',function(event) {
+    // if(event.origin !== 'http://scriptandstyle.com') return;
+    console.log('received response:  ',event.data);
+
+    let para=document.createElement("p");
+    let node=document.createTextNode(event.data);
+    para.appendChild(node);
+    showMessage.appendChild(para);
+  },false);
+
+</script>
+</body>
+</html>

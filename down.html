@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>XMLHttpRequest Download Progress</title>
+</head>
+<body>
+<progress id="p"></progress>
+<input type="button" onclick="downloadAndSave();" value="Download"/>
+<script>
+  function downloadAndSave()
+  {
+    var progressBar = document.getElementById('p'), xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://47.104.97.226:7000/%E5%8C%BB%E9%99%A2CRF/dist.zip');
+    xhr.responseType = "arraybuffer";
+    xhr.onprogress = function(event) {
+      if(event.lengthComputable) {
+        progressBar.max = event.total;
+        progressBar.value = event.loaded;
+      }
+    };
+    xhr.onloadend = function(event) {
+      progressBar.value = event.loaded;
+      saveByeToFile('2', xhr.response);
+    };
+    xhr.send();
+  }
+
+  function saveByeToFile(name, arrayBuffer) {
+    var byteArray = new Uint8Array(arrayBuffer);
+    var a = window.document.createElement('a');
+
+    a.href = window.URL.createObjectURL(new Blob([ byteArray ], {
+      type : 'application/octet-stream'
+    }));
+    a.download = name;
+
+    // Append anchor to body.
+    document.body.appendChild(a)
+    a.click();
+
+    // Remove anchor from body
+    document.body.removeChild(a)
+  }
+</script>
+</body>
+<html>

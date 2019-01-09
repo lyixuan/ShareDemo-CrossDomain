@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CORS跨域</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<h3>CORS跨域</h3>
+<button onclick="get('http://localhost:9000/user')">发送跨域get请求 - http://localhost:9000/user</button>
+<button onclick="post('http://localhost:9000/user')">发送跨域post请求 - http://localhost:9000/user</button>
+
+
+
+<p>实现cors跨域</p>
+<p>各项配置的实现结果</p>
+<p>简单与非简单请求配置的不同</p>
+<script>
+  function get(url) {
+    axios.get(url, {
+      params: {
+        ID: 12345
+      }
+    }).then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  function post(url) {
+    axios.interceptors.request.use(
+      (config) => {
+        config.headers.Authorization = 'Custom header';
+        // config.withCredentials = true;
+        return config;
+      },
+      error => Promise.reject(error),
+    );
+    axios.post(url, {
+      ID: 12345
+    }).then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+</script>
+</body>
+</html>

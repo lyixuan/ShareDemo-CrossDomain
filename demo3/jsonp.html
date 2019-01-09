@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jsonp跨域</title>
+</head>
+<body>
+<h3>jsonp跨域</h3>
+
+<button onclick="getJsonp()">动态jsonp</button>
+<script>
+  function fn(data) {
+    console.log(data);
+    alert(data.msg);
+  }
+</script>
+
+<script type="text/javascript" src="http://127.0.0.1:9000/jsonp?callback=fn"></script>
+
+<script>
+  function getJsonp() {
+    //原生的实现方式
+    const script = document.createElement('script');
+
+    script.src = 'http://127.0.0.1:9000/jsonp?callback=fn';
+
+    document.body.appendChild(script);
+
+    function fn(data) {
+      console.log(data);
+      alert(data.msg);
+    }
+  }
+</script>
+
+</body>
+</html>
